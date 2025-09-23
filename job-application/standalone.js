@@ -10,6 +10,45 @@ class StandaloneJobAssistant {
         this.init();
     }
 
+    // ===== Export / Import (Standalone) =====
+    exportProfile() {
+        const data = JSON.stringify(this.profileData || {}, null, 2);
+        const blob = new Blob([data], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const ts = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-');
+        a.href = url;
+        a.download = `job-profile-${ts}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        this.showStatus('Profile exported as JSON', 'success');
+    }
+
+    importProfile(file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+            try {
+                const obj = JSON.parse(String(reader.result));
+                if (typeof obj !== 'object' || obj === null) throw new Error('Invalid JSON');
+                this.profileData = obj;
+                localStorage.setItem('jobApplicationProfile', JSON.stringify(this.profileData));
+                this.hasProfileData = true;
+                this.updateFormFields();
+                this.renderSkillsExperience();
+                this.updateProfileDisplay();
+                this.showProfileView();
+                this.showStatus('Profile imported successfully', 'success');
+            } catch (e) {
+                console.error('Import error:', e);
+                this.showStatus('Failed to import JSON', 'error');
+            }
+        };
+        reader.onerror = () => this.showStatus('Failed to read file', 'error');
+        reader.readAsText(file);
+    }
+
     init() {
         this.loadProfileData();
         this.setupEventListeners();
@@ -44,6 +83,24 @@ class StandaloneJobAssistant {
         const initialAddSkillBtn = document.getElementById('initialAddSkillBtn');
         if (initialAddSkillBtn) {
             initialAddSkillBtn.addEventListener('click', () => this.addSkillRow('initialSkillsExperienceList'));
+        }
+
+        // Export profile
+        const exportBtn = document.getElementById('exportBtn');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', () => this.exportProfile());
+        }
+
+        // Import profile
+        const importBtn = document.getElementById('importBtn');
+        const importFile = document.getElementById('importFile');
+        if (importBtn && importFile) {
+            importBtn.addEventListener('click', () => importFile.click());
+            importFile.addEventListener('change', (e) => {
+                const file = e.target.files && e.target.files[0];
+                if (file) this.importProfile(file);
+                importFile.value = '';
+            });
         }
     }
 

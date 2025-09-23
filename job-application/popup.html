@@ -162,6 +162,17 @@
                                     <input type="text" id="salary" name="salary" placeholder="e.g., $50,000 - $70,000">
                                 </div>
                             </div>
+
+                            <div class="form-section">
+                                <h2>Data Management</h2>
+                                <p class="form-help" style="color: var(--text-secondary); font-size: 12px; margin-bottom: 8px;">Export your profile to a JSON file, import a saved profile, or clear all data.</p>
+                                <div class="form-actions" style="gap: 8px; display: flex; flex-wrap: wrap;">
+                                    <button type="button" id="exportBtn" class="btn-secondary">Export JSON</button>
+                                    <button type="button" id="importBtn" class="btn-secondary">Import JSON</button>
+                                    <input type="file" id="importFile" accept="application/json" style="display:none" />
+                                    <button type="button" id="clearDataBtn" class="btn-secondary">🗑️ Clear All Data</button>
+                                </div>
+                            </div>
                             
                             <div class="form-actions">
                                 <button type="submit" class="btn-primary">Save Profile</button>
