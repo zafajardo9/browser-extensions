@@ -1,0 +1,1 @@
+Compilation of the created browser extension created by zack
