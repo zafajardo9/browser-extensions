@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Assistant</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="app">
+        <div class="current-site" id="currentSite"></div>
+        
+        <div class="main-content" id="mainContent">
+            <!-- Profile View (shown when data exists) -->
+            <div class="profile-view" id="profileView">
+                <div class="profile-header">
+                    <div class="profile-name" id="profileName">John Doe</div>
+                    <div class="profile-title" id="profileTitle">Software Developer</div>
+                </div>
+                
+                <div class="tab-navigation">
+                    <button class="tab-btn active" data-tab="profile">Profile</button>
+                    <button class="tab-btn" data-tab="edit">Edit</button>
+                    <button class="tab-btn fill-btn" data-tab="fill">Fill Form</button>
+                </div>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="profileTab">
+                        <div class="profile-summary">
+                            <div class="summary-section">
+                                <h3>Personal Info</h3>
+                                <div class="summary-item">
+                                    <span class="label">Email:</span>
+                                    <span class="value" id="summaryEmail">john@example.com</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Phone:</span>
+                                    <span class="value" id="summaryPhone">+1234567890</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Location:</span>
+                                    <span class="value" id="summaryLocation">New York, USA</span>
+                                </div>
+                            </div>
+                            
+                            <div class="summary-section">
+                                <h3>Professional</h3>
+                                <div class="summary-item">
+                                    <span class="label">Experience:</span>
+                                    <span class="value" id="summaryExperience">5 years</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Skills:</span>
+                                    <span class="value" id="summarySkills">JavaScript, React, Node.js</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="editTab">
+                        <form class="profile-form" id="profileForm">
+                            <div class="form-grid">
+                                <div class="form-column">
+                                    <div class="form-section">
+                                        <h2>Personal Information</h2>
+                                        <div class="input-group">
+                                            <label for="firstName">First Name *</label>
+                                            <input type="text" id="firstName" name="firstName" required>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="lastName">Last Name *</label>
+                                            <input type="text" id="lastName" name="lastName" required>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="email">Email *</label>
+                                            <input type="email" id="email" name="email" required>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="phone">Phone *</label>
+                                            <input type="tel" id="phone" name="phone" required>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="address">Address</label>
+                                            <input type="text" id="address" name="address">
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="city">City</label>
+                                            <input type="text" id="city" name="city">
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="country">Country</label>
+                                            <input type="text" id="country" name="country">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-column">
+                                    <div class="form-section">
+                                        <h2>Professional</h2>
+                                        <div class="input-group">
+                                            <label for="jobTitle">Job Title</label>
+                                            <input type="text" id="jobTitle" name="jobTitle">
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="company">Company</label>
+                                            <input type="text" id="company" name="company">
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="experience">Experience (years)</label>
+                                            <input type="number" id="experience" name="experience" min="0">
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="skills">Skills</label>
+                                            <input type="text" id="skills" name="skills" placeholder="JavaScript, React, Node.js">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-section">
+                                        <h2>Skill-based Experience</h2>
+                                        <p class="form-help" style="color: var(--text-secondary); font-size: 12px; margin-bottom: 8px;">Add skills or programming languages with years of experience. We'll use these to answer questions like "How many years of Java experience do you have?"</p>
+                                        <div id="skillsExperienceList"></div>
+                                        <button type="button" id="addSkillBtn" class="btn-secondary" style="margin-top: 8px;">+ Add Skill</button>
+                                    </div>
+
+                                    <div class="form-section">
+                                        <h2>Education</h2>
+                                        <div class="input-group">
+                                            <label for="degree">Degree</label>
+                                            <select id="degree" name="degree">
+                                                <option value="">Select Degree</option>
+                                                <option value="High School">High School</option>
+                                                <option value="Associate">Associate Degree</option>
+                                                <option value="Bachelor">Bachelor's Degree</option>
+                                                <option value="Master">Master's Degree</option>
+                                                <option value="PhD">PhD</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="university">University</label>
+                                            <input type="text" id="university" name="university">
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="graduationYear">Graduation Year</label>
+                                            <input type="number" id="graduationYear" name="graduationYear" min="1950" max="2030">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h2>Additional Information</h2>
+                                <div class="input-group">
+                                    <label for="coverLetter">Cover Letter</label>
+                                    <textarea id="coverLetter" name="coverLetter" placeholder="Brief cover letter template..."></textarea>
+                                </div>
+                                <div class="input-group">
+                                    <label for="portfolio">Portfolio/LinkedIn</label>
+                                    <input type="url" id="portfolio" name="portfolio">
+                                </div>
+                                <div class="input-group">
+                                    <label for="salary">Expected Salary</label>
+                                    <input type="text" id="salary" name="salary" placeholder="e.g., $50,000 - $70,000">
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">Save Profile</button>
+                                <button type="button" class="btn-secondary" onclick="switchToTabGlobal('profile')">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="tab-pane" id="fillTab">
+                        <div class="fill-content">
+                            <p class="fill-description">Click below to auto-fill the current job application form with your saved information.</p>
+                            <button id="fillFormBtn" class="btn-primary btn-large">Fill Current Form</button>
+                            <button class="btn-secondary" onclick="switchToTabGlobal('profile')">Back to Profile</button>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" id="clearDataBtn" class="btn-secondary">🗑️ Clear All Data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Initial Form (shown when no data exists) -->
+            <div class="initial-form" id="initialForm">
+                <div class="form-header">
+                    <h1>Welcome to Job Assistant</h1>
+                    <p>Fill in your information to get started</p>
+                </div>
+                
+                <form class="profile-form" id="initialProfileForm">
+                    <div class="form-grid">
+                        <div class="form-column">
+                            <div class="form-section">
+                                <h2>Personal Information</h2>
+                                <div class="input-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="phone">Phone *</label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-column">
+                            <div class="form-section">
+                                <h2>Professional</h2>
+                                <div class="input-group">
+                                    <label for="jobTitle">Job Title</label>
+                                    <input type="text" id="jobTitle" name="jobTitle">
+                                </div>
+                                <div class="input-group">
+                                    <label for="company">Company</label>
+                                    <input type="text" id="company" name="company">
+                                </div>
+                                <div class="input-group">
+                                    <label for="experience">Experience (years)</label>
+                                    <input type="number" id="experience" name="experience" min="0">
+                                </div>
+                                <div class="input-group">
+                                    <label for="skills">Skills</label>
+                                    <input type="text" id="skills" name="skills" placeholder="JavaScript, React, Node.js">
+                                </div>
+                                <div class="form-section">
+                                    <h2>Skill-based Experience</h2>
+                                    <div id="initialSkillsExperienceList"></div>
+                                    <button type="button" id="initialAddSkillBtn" class="btn-secondary" style="margin-top: 8px;">+ Add Skill</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary btn-large">Save & Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div id="status" class="status-message"></div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

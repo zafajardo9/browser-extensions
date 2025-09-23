@@ -1,0 +1,158 @@
+/* Standalone Mode Responsive Styles */
+
+/* Override popup-specific styles for standalone mode */
+body {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    background: #f8fafc;
+}
+
+.app {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Responsive improvements for standalone */
+@media (min-width: 768px) {
+    .app {
+        margin: 20px auto;
+        border-radius: 12px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    body {
+        background: #e5e7eb;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .app {
+        margin: 0;
+        border-radius: 0;
+        min-height: 100vh;
+    }
+    
+    body {
+        background: white;
+    }
+}
+
+/* Better spacing for standalone */
+.tab-content {
+    padding: 20px 24px;
+}
+
+.profile-header {
+    padding: 20px 24px;
+}
+
+.initial-form {
+    padding: 24px;
+}
+
+/* Improved form layout for larger screens */
+@media (min-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+    
+    .profile-summary {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+}
+
+/* Better mobile experience */
+@media (max-width: 767px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .profile-summary {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .form-section {
+        padding: 16px;
+    }
+    
+    .tab-content {
+        padding: 16px;
+    }
+}
+
+/* Enhanced button styles for standalone */
+.btn-primary, .btn-secondary {
+    transition: all 0.2s ease;
+    font-weight: 600;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Better input focus states */
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Scrollbar styling for standalone */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* Print styles for standalone */
+@media print {
+    body {
+        background: white;
+    }
+    
+    .app {
+        box-shadow: none;
+        margin: 0;
+        border-radius: 0;
+    }
+    
+    .tab-navigation,
+    .btn-primary,
+    .btn-secondary {
+        display: none;
+    }
+    
+    .tab-pane {
+        display: block !important;
+    }
+    
+    .profile-summary {
+        grid-template-columns: 1fr 1fr;
+    }
+}
