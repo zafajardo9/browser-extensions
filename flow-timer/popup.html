@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FlowTimer Notes</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div id="app" class="app">
+      <header class="app-header">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">⏱️</div>
+          <div class="titles">
+            <h1>FlowTimer</h1>
+            <p class="subtitle">Notes • Tasks • Timers</p>
+          </div>
+        </div>
+      </header>
+
+      <section class="tabs-bar">
+        <nav class="tabs" role="tablist" aria-label="Views">
+          <button class="tab is-active" data-tab="tasks" role="tab" aria-selected="true">Tasks</button>
+          <button class="tab" data-tab="pomodoro" role="tab" aria-selected="false">Pomodoro</button>
+          <button class="tab" data-tab="completed" role="tab" aria-selected="false">Completed</button>
+          <button class="tab" data-tab="heatmap" role="tab" aria-selected="false">Heatmap</button>
+        </nav>
+      </section>
+
+      <main>
+        <!-- Tasks Tab -->
+        <section class="tab-panel" data-panel="tasks" role="tabpanel">
+          <section class="add">
+            <div class="add-box">
+              <input id="taskTitle" class="input" type="text" placeholder="What are you working on?" autocomplete="off" />
+              <button id="addBtn" class="btn primary" title="Add task">Add</button>
+            </div>
+            <p class="hint">Press Enter to add • Click a title to edit • Timers keep running even if you close this popup</p>
+          </section>
+
+          <section class="list-section">
+            <div class="section-header">
+              <h2>Active</h2>
+              <div class="right">
+                <button id="pauseAllBtn" class="btn ghost small" title="Pause all running timers">Pause all</button>
+              </div>
+            </div>
+            <ul id="taskList" class="task-list"></ul>
+          </section>
+        </section>
+
+        <!-- Pomodoro Tab -->
+        <section class="tab-panel is-hidden" data-panel="pomodoro" role="tabpanel" aria-hidden="true">
+          <section class="pomodoro">
+            <div class="pom-config">
+              <label>Work (min) <input id="pomWork" type="number" min="1" max="180" value="25" /></label>
+              <label>Break (min) <input id="pomBreak" type="number" min="1" max="60" value="5" /></label>
+              <label>Long Break (min) <input id="pomLong" type="number" min="1" max="60" value="15" /></label>
+              <label>Cycles <input id="pomCycles" type="number" min="1" max="12" value="4" /></label>
+            </div>
+            <div class="pom-timer">
+              <div id="pomPhase" class="pom-phase">Work</div>
+              <div id="pomTime" class="pom-time">25:00</div>
+              <div class="pom-controls">
+                <button id="pomStart" class="btn primary">Start</button>
+                <button id="pomPause" class="btn">Pause</button>
+                <button id="pomReset" class="btn ghost">Reset</button>
+              </div>
+              <div class="pom-meta">
+                <span id="pomCycle">Cycle 1</span>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- Completed Tab -->
+        <section class="tab-panel is-hidden" data-panel="completed" role="tabpanel" aria-hidden="true">
+          <section class="list-section">
+            <div class="section-header">
+              <h2>Completed Today</h2>
+              <div class="right">
+                <button id="clearDoneBtn" class="btn ghost small" title="Clear completed tasks from today">Clear</button>
+              </div>
+            </div>
+            <ul id="doneList" class="task-list"></ul>
+          </section>
+        </section>
+
+        <!-- Heatmap Tab -->
+        <section class="tab-panel is-hidden" data-panel="heatmap" role="tabpanel" aria-hidden="true">
+          <section class="heatmap">
+            <div class="section-header">
+              <h2>Activity</h2>
+            </div>
+            <div id="heatmapGrid" class="heatmap-grid" aria-label="Completion heatmap"></div>
+            <p class="hint">Darker squares mean more completed tasks for that day.</p>
+          </section>
+        </section>
+      </main>
+
+      <footer class="app-footer">
+        <span class="tip">Local storage • Offline • MV3</span>
+        <a class="link" id="exportBtn" href="#" title="Export your data">Export</a>
+        <a class="link" id="importBtn" href="#" title="Import your data">Import</a>
+        <input id="importFile" type="file" accept="application/json" hidden />
+      </footer>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
